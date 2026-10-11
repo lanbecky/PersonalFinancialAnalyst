@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個人財務分析師 | Personal Financial Analyst</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">
+                    <span class="icon">💰</span>
+                    個人財務分析師
+                </h1>
+                <p class="subtitle">智能任務規劃 | 自主執行 | 自我驗證</p>
+            </div>
+            <div class="status-indicator" id="statusIndicator">
+                <span class="status-dot"></span>
+                <span class="status-text">系統就緒</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Query Section -->
+            <section class="query-section">
+                <div class="query-container">
+                    <label for="queryInput" class="query-label">
+                        輸入您的財務查詢
+                    </label>
+                    <div class="input-group">
+                        <textarea 
+                            id="queryInput" 
+                            class="query-input" 
+                            placeholder="例如：Compare AAPL and MSFT revenue"
+                            rows="3"
+                        ></textarea>
+                        <button id="analyzeBtn" class="btn btn-primary">
+                            <span class="btn-text">開始分析</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Example Queries -->
+                <div class="examples-section" id="examplesSection">
+                    <h3 class="examples-title">範例查詢</h3>
+                    <div class="examples-grid" id="examplesGrid">
+                        <!-- Examples will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <!-- Loading State -->
+                <div class="loading" id="loadingState">
+                    <div class="loading-spinner"></div>
+                    <p class="loading-text">分析中...</p>
+                    <p class="loading-subtext" id="loadingSubtext">正在執行查詢</p>
+                </div>
+
+                <!-- Results Content -->
+                <div class="results-content" id="resultsContent" style="display: none;">
+                    <!-- Query Info -->
+                    <div class="result-header">
+                        <h2 class="result-title">分析結果</h2>
+                        <div class="result-meta">
+                            <span class="meta-item">
+                                <span class="meta-label">執行時間:</span>
+                                <span class="meta-value" id="executionTime">-</span>
+                            </span>
+                            <span class="meta-item">
+                                <span class="meta-label">步驟數:</span>
+                                <span class="meta-value" id="stepsCount">-</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Execution Steps -->
+                    <div class="steps-container" id="stepsContainer">
+                        <h3 class="steps-title">執行步驟</h3>
+                        <div class="steps-list" id="stepsList">
+                            <!-- Steps will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Final Answer -->
+                    <div class="answer-container">
+                        <h3 class="answer-title">最終答案</h3>
+                        <div class="answer-content" id="answerContent">
+                            <!-- Answer will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Error State -->
+                <div class="error-state" id="errorState" style="display: none;">
+                    <div class="error-icon">⚠️</div>
+                    <h3 class="error-title">發生錯誤</h3>
+                    <p class="error-message" id="errorMessage"></p>
+                    <button class="btn btn-secondary" onclick="resetResults()">重新嘗試</button>
+                </div>
+            </section>
+
+            <!-- History Section -->
+            <section class="history-section">
+                <div class="history-header">
+                    <h3 class="history-title">查詢歷史</h3>
+                    <button class="btn btn-text" onclick="refreshHistory()">
+                        <span>🔄</span>
+                        刷新
+                    </button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <p class="empty-state">暫無查詢歷史</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Personal Financial Analyst | 使用 Python + Flask 構建</p>
+            <div class="footer-links">
+                <a href="/api/status" target="_blank">系統狀態</a>
+                <a href="/api/tools" target="_blank">可用工具</a>
+                <a href="https://github.com" target="_blank">GitHub</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
